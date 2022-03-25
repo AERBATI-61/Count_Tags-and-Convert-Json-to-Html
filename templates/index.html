@@ -65,48 +65,53 @@
         <div class="main-wrapper">
             <div class="page-wrapper" style="margin-right: 60px">
                 <div class="row">
-                    <div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
+
+                    <div class="col-md-6 col-sm-6 col-lg-6 col-xl-6">
                         <div class="dash-widget dash-widget5">
                             <div class="dash-widget-info d-inline-block text-left">
                                 <span><h3 style="text-align: center">{{ keyword }} </h3></span>
                                 <span><h4 style="text-align: center">Bu teg'den {{ ariyorum }} tane vardir</h4></span>
                             </div>
                             <span class="float-left"><img src="{% static 'assets/img/dash/tag.jpg' %}" alt=""
-                                                          width="80"></span>
+                                                          width="150"></span>
                         </div>
                     </div>
 
 
-                    <div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
-                        <div class="dash-widget dash-widget5">
-                            <span class="float-left"><img src="{% static 'assets/img/dash/dash-1.png' %}" alt=""
-                                                          width="80"></span>
-                            <div class="dash-widget-info text-right">
-
-                                <h3>{{ kapanmayan_tag }} </h3>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
+                    <div class="col-md-6 col-sm-6 col-lg-6 col-xl-6">
                         <div class="dash-widget dash-widget5">
                             <div class="dash-widget-info text-left d-inline-block">
-                                <span>Teachers</span>
-                                <h3>12,000</h3>
+
+
+
+                                {% for sahipsiz in tag_gosteriyor %}
+                                    {% if sahipsiz == '' %}
+                                        <span></span>
+
+
+
+                                    {% elif '<' in sahipsiz and '/' not in sahipsiz %}
+                                        <h3><span style="color: saddlebrown">{{ sahipsiz }}</span> Bu elemanin <span style="color: saddlebrown">Kapali</span> tag yoktur.</h3>
+
+
+                                    {% elif '/' in sahipsiz and '<' in sahipsiz %}
+                                        <h3><span style="color: #c82333">{{ sahipsiz }}</span> Bu elemanin <span style="color: #c82333">Acik</span> tag yoktur.</h3>
+
+
+                                    {% else %}
+
+                                        <span>{{ sahipsiz }}</span><br>
+                                    {% endif %}
+
+
+
+                                {% endfor %}
                             </div>
-                            <span class="float-right"><img src="{% static 'assets/img/dash/dash-2.png' %}" width="80"
+                            <span class="float-right"><img src="{% static 'assets/img/dash/MUKEMMEL.png' %}" width="160"
                                                            alt=""></span>
                         </div>
                     </div>
-                    <div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
-                        <div class="dash-widget dash-widget5">
-                            <span class="float-left"><img src="{% static 'assets/img/dash/dash-3.png' %}" alt=""
-                                                          width="80"></span>
-                            <div class="dash-widget-info text-right">
-                                <span>Parents</span>
-                                <h3>20,000</h3>
-                            </div>
-                        </div>
-                    </div>
+
 
                 </div>
             </div>
@@ -119,11 +124,12 @@
         <body class="mini-sidebar">
         <div class="main-wrapper">
             <div class="page-wrapper" style="margin-right: 60px">
-                <div class="row" >
+                <div class="row">
                     <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
-                        <div class="dash-widget dash-widget5 btn-success" >
-                            <div class="dash-widget-info d-inline-block text-left">
-                                <span><h3 style="text-align: center" >   Kayit olmalisiniz </h3></span>
+                        <div class="dash-widget dash-widget5 btn-success">
+                            <div class="dash-widget-info d-inline-block text-left ">
+                                <h3><span style="text-align: center; margin-left: 550px">  Kayit olmalisiniz  </span>
+                                </h3>
                             </div>
 
                         </div>

@@ -1,124 +1,43 @@
 from django.shortcuts import render
 
 from .html_tags import *
+
 #
 # from .myCode import *
 
 
 s = """
-<! DOCTYPE>
-    <html>
-    <head>
-    rahile
-    meryem
-    rahile
-        <title>
-            GeeksforGeeks
-        </title>
-    </head>
-    <body>
-        <button>
-            
-                    <button>
-        
-        </button>  
-                    <body>
-    </body>
-    </html>
+<html>
+<html>
+
+<b>
+
+</b>
+</b>
+<h1>
+</h1>
+<h1>
+
+<body>
+</body>
+</body>
+
+</html>
+
 """
+
 
 def indexView(request):
     keyword = request.GET.get("keyword")
     ariyorum = sayiyorum(keyword)
-
-
-    kapanmayan_tag = autoComplete(s)
-
-    # for i in kapanmayan_tag:
-    #     print(i)
-
-
-
-
-    print(kapanmayan_tag)
-    # print(ariyorum)
-
-
+    tag_gosteriyor = tag_goster()
 
     context = {
-
-        "kapanmayan_tag": kapanmayan_tag,
         "ariyorum": ariyorum,
         "keyword": keyword,
-
+        "tag_gosteriyor": tag_gosteriyor
     }
     return render(request, 'index.html', context)
-
-
-
-
-def autoComplete(s):
-    linesOfCode = list(s.strip().split("\n"))
-    selfClosedTags = ["area", "base", "br", \
-                      "col", "embed", "hr", "img", \
-                      "input", "link", "meta", "param", \
-                      "source", "track", "wbr"]
-    # privateCarecter = ["\"", ".", ",", "<", ">", "_", "-", "!"]
-
-    n = len(linesOfCode)
-    stack = []
-    for i in range(n):
-        j = 0
-        line = linesOfCode[i]
-        while j < len(linesOfCode[i]):
-
-            if j + 1 < len(line) and line[j] == "<" and line[j + 1] == "/":
-                tag = []
-                j += 2
-
-                while j < len(line) and "a" <= line[j] <= "z":
-                    tag.append(line[j])
-                    j += 1
-                while j < len(line) and line[j] != ">":
-                    j += 1
-                if stack[-1] != tag:
-                    tag.append("</" + "".join(stack[-1]) + ">")
-                    return tag
-                    # return "</" + "".join(tag) + ">"
-                stack.pop()
-
-
-
-
-            elif j + 1 < len(line) and line[j] == "<" and line[j] == "!":
-                continue
-
-
-
-
-
-            elif line[j] == "<":
-                tag = []
-                j += 1
-
-                while j < len(line) and "a" <= line[j] <= "z":
-                    tag.append(line[j])
-                    j += 1
-
-                while j < len(line) and line[j] != ">":
-                    j += 1
-
-
-                if "".join(tag) not in selfClosedTags:
-                    stack.append(tag)
-            j += 1
-
-    if stack:
-        tag = stack.pop()
-        return "</" + "".join(tag) + ">"
-    return -1
-
-
 
 
 def sayiyorum(hangi_tag):
@@ -131,6 +50,19 @@ def sayiyorum(hangi_tag):
     return say
 
 
+def tag_goster():
+    kelimeler = list(s.strip().split("\n"))
+    stack = []
+    uzunluk = len(kelimeler)
+    j = 0
 
+    for i in range(uzunluk):
+        j = j + i + 1
+        while j < uzunluk - 1:
+            if kelimeler[i].strip() == kelimeler[j].strip():
+                stack.append(kelimeler[i].strip())
+            j += 1
+        if j == uzunluk - 1:
+            j = 0
 
-
+    return stack
