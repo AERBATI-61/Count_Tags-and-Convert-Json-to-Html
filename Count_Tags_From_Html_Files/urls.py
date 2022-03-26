@@ -23,5 +23,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', indexView, name="index"),
     path('', include('user.urls')),
-    # path('', autoComplete, name="autoComplete"),
+    # path('jsondata/', changer, name="changer"),
+    path('json/', jsonView, name="json"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

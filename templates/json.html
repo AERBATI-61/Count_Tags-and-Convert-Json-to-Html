@@ -1,0 +1,260 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+    <body>
+
+    <div class="main-wrapper">
+
+
+        <div class="page-wrapper" style="margin-left: 60px; margin-right: 60px">
+            <div class="content container-fluid">
+                <div class="page-header">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                            <h5 class="text mb-1 mt-0 page-title">Search HTML Input Types</h5>
+
+
+                            <ul class="nav float-left">
+                                <li>
+                                    <div class="top-nav-search">
+                                        <a href="#" class="responsive-search">
+                                            <i class="fa fa-search"></i>
+                                        </a>
+                                        <form>
+                                            {% csrf_token %}
+                                            <input class="form-control" type="text" name="ariyorum"
+                                                   placeholder="Search here">
+                                            <button class="btn" type="submit"><i class="fa fa-search"></i></button>
+                                        </form>
+                                    </div>
+                                </li>
+                                <li>
+                                </li>
+                            </ul>
+
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                                <ul class="breadcrumb float-right p-0 mb-0">
+                                    <li class="breadcrumb-item"><a href="{% url 'index' %}"><i class="fas fa-home"></i>Home</a>
+                                    </li>
+
+                                </ul>
+                            </div>
+
+
+                        </div>
+
+                    </div>
+                </div>
+
+
+                <div class="page-content">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+
+
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title">Input Space</h4>
+                                </div>
+                                <div class="card-body">
+                                    <form action="#">
+                                        {% csrf_token %}
+
+
+                                        {% if data.input == key %}
+                                            <div class="form-group">
+                                                <label>Input</label>
+                                                <input type="text" class="form-control" name="input"
+                                                       value="{{ data.input }}">
+                                            </div>
+                                        {% endif %}
+
+
+
+
+                                        {% if data.text == key %}
+                                            <div class="form-group">
+                                                <label>Text</label>
+                                                <input type="text" class="form-control" name="text"
+                                                       value="{{ data.text }}">
+                                            </div>
+                                        {% endif %}
+
+
+
+                                        {% if data.number == key %}
+                                            <div class="form-group">
+                                                <label>Number</label>
+                                                <input type="number" disabled class="form-control" name="number"
+                                                       value="{{ data.number }}">
+                                            </div>
+                                        {% endif %}
+
+
+
+                                        {% if data.textarea == key %}
+                                            <div class="form-group">
+                                                <label>TextArea</label>
+                                                <textarea class="form-control" placeholder="textarea" name="textarea"
+                                                          rows="4">{{ data.textarea }}</textarea>
+                                            </div>
+                                        {% endif %}
+                                    </form>
+                                </div>
+                            </div>
+
+
+                            <div class="card">
+                                <div class="card-header">
+                                    <div class="card-title">Select</div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <form>
+                                                {% csrf_token %}
+
+                                                {% if data.search == key or key == data.button %}
+                                                    <div class="col-lg-12">
+                                                        <div class="form-group">
+                                                            <label>Search</label>
+                                                            <input type="search" class="form-control" name="search"
+                                                                   value="{{ data.search }}">
+                                                        </div>
+                                                        <button type="button" class="btn-success btn-block">Button
+                                                        </button>
+                                                    </div>
+                                                {% endif %}
+
+
+
+
+
+                                                {% if data.checkbox == True and data.checkbox == key %}
+                                                    <div class="form-group row radio-opti">
+                                                        <label class="col-form-label col-md-2">Gender</label>
+                                                        <div class="col-md-10">
+                                                            {% if data.checkbox == True %}
+                                                                <div class="checkbox">
+                                                                    <label>
+                                                                        <input type="checkbox" checked
+                                                                               value="{{ data.checkbox }}"
+                                                                               name="checkbox">
+                                                                        Male
+                                                                    </label>
+                                                                </div>
+                                                                <div class="radio">
+                                                                    <label>
+                                                                        <input type="checkbox" disabled name="checkbox">
+                                                                        Female
+                                                                    </label>
+                                                                </div>
+                                                            {% endif %}
+                                                        </div>
+                                                    </div>
+                                                {% endif %}
+
+
+
+                                                {% if data.checkbox == False and data.checkbox == key %}
+                                                    <div class="form-group row radio-opti">
+                                                        <label class="col-form-label col-md-2">Gender</label>
+                                                        <div class="col-md-10">
+
+
+                                                            {% if data.checkbox == False %}
+                                                                <div class="checkbox">
+                                                                    <label>
+                                                                        <input type="checkbox" disabled
+                                                                               value="{{ data.checkbox }}"
+                                                                               name="checkbox"> Male
+                                                                    </label>
+                                                                </div>
+                                                                <div class="radio">
+                                                                    <label>
+                                                                        <input type="checkbox" checked name="checkbox">
+                                                                        Female
+                                                                    </label>
+                                                                </div>
+                                                            {% endif %}
+
+                                                        </div>
+                                                    </div>
+                                                {% endif %}
+
+
+
+                                                {% if data.select == key %}
+                                                    <div class="form-group">
+                                                        <label>Select</label>
+                                                        <select class="form-control">
+                                                            {% for s in data.select %}
+                                                                <option>
+                                                                    {{ s }}
+                                                                </option>
+                                                            {% endfor %}
+                                                        </select>
+                                                    </div>
+                                                {% endif %}
+
+
+
+
+
+                                                {% if data.tel == key %}
+                                                    <div class="form-group">
+                                                        <label>Phone Number</label>
+                                                        <input type="tel" class="form-control" name="tel"
+                                                               value="{{ data.tel }}">
+                                                    </div>
+                                                {% endif %}
+
+
+                                                {% if data.email == key %}
+                                                    <div class="form-group">
+                                                        <label>Email</label>
+                                                        <input type="email" class="form-control" name="email"
+                                                               value="{{ data.email }}">
+                                                    </div>
+                                                {% endif %}
+
+
+                                                {% if data.password == key %}
+                                                    <div class="form-group">
+                                                        <label>Password</label>
+                                                        <input type="password" disabled class="form-control"
+                                                               name="password"
+                                                               value="{{ data.password }}">
+                                                    </div>
+                                                {% endif %}
+
+
+                                                {% if data.date == key %}
+                                                    <div class="form-group">
+                                                        <label>Date</label>
+                                                        <input type="date" class="form-control"
+                                                               name="date"
+                                                               value="{{ data.date }}">
+                                                    </div>
+                                                {% endif %}
+
+
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+
+{% endblock %}

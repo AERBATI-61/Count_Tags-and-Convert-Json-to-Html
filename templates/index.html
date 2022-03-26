@@ -3,11 +3,6 @@
 {% block content %}
 
 
-
-
-
-
-
     <div class="mini-sidebar" style="margin: 2rem">
         <div class="header" style="margin-right: 60px">
             <a id="mobile_btn" class="mobile_btn float-left" href="#sidebar"><i class="fas fa-bars"
@@ -28,10 +23,21 @@
                         </form>
                     </div>
                 </li>
+
+                <a href="{% url 'json' %}">
+                    <div class="card-body" style="margin: -0.25rem">
+                        <button type="button" class="btn btn-primary d-inline-block mb-2">JSON</button>
+                    </div>
+
+
+                </a>
                 <li>
                     <a href="index.html" class="mobile-logo d-md-block d-lg-none d-block"><img
                             src="{% static 'assets/img/logo1.png' %}" alt="" width="30" height="30"></a>
+
+
                 </li>
+
             </ul>
 
             <ul class="nav user-menu float-right">
@@ -64,7 +70,7 @@
         <body class="mini-sidebar">
         <div class="main-wrapper">
             <div class="page-wrapper" style="margin-right: 60px">
-                <div class="row">
+                <div class="row" >
 
                     <div class="col-md-6 col-sm-6 col-lg-6 col-xl-6">
                         <div class="dash-widget dash-widget5">
@@ -78,46 +84,47 @@
                     </div>
 
 
-                    <div class="col-md-6 col-sm-6 col-lg-6 col-xl-6">
-                        <div class="dash-widget dash-widget5">
-                            <div class="dash-widget-info text-left d-inline-block">
+                    <div class="col-md-6 col-sm-6 col-lg-6 col-xl-6" >
+                        <div class="dash-widget dash-widget5" >
+                            <div class="dash-widget-info text-left d-inline-block" style="
 
+                              width: 800px;
+                              height: 500px;
+                              border: 1px solid black;
+                              overflow-x: hidden;
+                              overflow-y: scroll;
+                              text-align: center;
 
+                            ">
 
                                 {% for sahipsiz in tag_gosteriyor %}
                                     {% if sahipsiz == '' %}
                                         <span></span>
 
 
-
                                     {% elif '<' in sahipsiz and '/' not in sahipsiz %}
-                                        <h3><span style="color: saddlebrown">{{ sahipsiz }}</span> Bu elemanin <span style="color: saddlebrown">Kapali</span> tag yoktur.</h3>
+                                        <h3><span style="color: saddlebrown">{{ sahipsiz }}</span> Bu elemanin <span
+                                                style="color: saddlebrown">Kapali</span> tag yoktur.</h3>
 
 
                                     {% elif '/' in sahipsiz and '<' in sahipsiz %}
-                                        <h3><span style="color: #c82333">{{ sahipsiz }}</span> Bu elemanin <span style="color: #c82333">Acik</span> tag yoktur.</h3>
-
+                                        <h3><span style="color: #c82333">{{ sahipsiz }}</span> Bu elemanin <span
+                                                style="color: #c82333">Acik</span> tag yoktur.</h3>
 
                                     {% else %}
-
                                         <span>{{ sahipsiz }}</span><br>
                                     {% endif %}
 
-
-
                                 {% endfor %}
                             </div>
-                            <span class="float-right"><img src="{% static 'assets/img/dash/MUKEMMEL.png' %}" width="160"
-                                                           alt=""></span>
+
                         </div>
                     </div>
-
-
                 </div>
             </div>
         </div>
 
-        </div>
+
         </body>
 
     {% else %}
@@ -146,4 +153,34 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 {% endblock %}
+
+
+
+
+
+
+
+
+
+

@@ -1,28 +1,19 @@
 from django.shortcuts import render
-
-from .html_tags import *
-
-#
-# from .myCode import *
-
+import json
+from django.http import JsonResponse
 
 s = """
 <html>
 <html>
-
 <b>
-
 </b>
-</b>
-<h1>
-</h1>
-<h1>
-
 <body>
 </body>
 </body>
-
 </html>
+
+
+
 
 """
 
@@ -35,7 +26,8 @@ def indexView(request):
     context = {
         "ariyorum": ariyorum,
         "keyword": keyword,
-        "tag_gosteriyor": tag_gosteriyor
+        "tag_gosteriyor": tag_gosteriyor,
+
     }
     return render(request, 'index.html', context)
 
@@ -64,5 +56,74 @@ def tag_goster():
             j += 1
         if j == uzunluk - 1:
             j = 0
-
     return stack
+
+
+
+
+
+def jsonView(request):
+    keyword = request.GET.get("ariyorum")
+
+
+
+
+
+    jsons = {
+        "input": "Arafat",
+        "text": "Emin",
+        "number": 391248,
+        "checkbox": True,
+        "tel": "5380514510",
+        "email": 'arafatemin34@gmail.com',
+        "password": "Password",
+        "date": "03/26/2022",
+        "search": "search",
+        "button": "button",
+        "textarea": "What is Lorem Ipsum?Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+        "select":
+            {"Python": "Python", "Django": "Django", "Javascript": "Javascript", "Html": "Html", "Css": "Css"},
+
+    }
+    key = ""
+    for i, j in jsons.items():
+        if i == keyword:
+            key = j
+
+
+
+
+
+
+
+
+    data = {
+        "input": jsons.get('input'),
+        "text": jsons.get('text'),
+        "number": jsons.get('number'),
+        "textarea": jsons.get('textarea'),
+
+        "search": jsons.get('search'),
+        "button": jsons.get('button'),
+        "checkbox": jsons.get('checkbox'),
+        "select": jsons.get('select'),
+
+
+        "tel": jsons.get('tel'),
+        "email": jsons.get('email'),
+        "password": jsons.get('password'),
+        "date": jsons.get('date'),
+
+    }
+
+
+
+
+    context = {
+        "data": data,
+        "jsons": jsons,
+        "keyword": keyword,
+        "key": key
+    }
+
+    return render(request, 'json.html', context)
