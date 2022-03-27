@@ -13,8 +13,6 @@ s = """
 </html>
 
 
-
-
 """
 
 
@@ -82,7 +80,7 @@ def jsonView(request):
         "button": "button",
         "textarea": "What is Lorem Ipsum?Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
         "select":
-            {"Python": "Python", "Django": "Django", "Javascript": "Javascript", "Html": "Html", "Css": "Css"},
+            {"Html": "Html", "Css": "Css", "Javascript": "Javascript", "Php": "Php", "SQL": "SQL"},
 
     }
     key = ""
