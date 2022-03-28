@@ -4,13 +4,18 @@ from django.http import JsonResponse
 
 s = """
 <html>
-<html>
-<b>
-</b>
-<body>
-</body>
-</body>
+    <html>
+    <html>
+    <html>
+        <b>
+        </b>
+        <body>
+            </body>
+        </body>
 </html>
+
+
+
 
 
 """
@@ -50,22 +55,17 @@ def tag_goster():
         j = j + i + 1
         while j < uzunluk - 1:
             if kelimeler[i].strip() == kelimeler[j].strip():
+                # if kelimeler[i] != stack[i]:
                 stack.append(kelimeler[i].strip())
             j += 1
         if j == uzunluk - 1:
             j = 0
+    print(stack[-1])
     return stack
-
-
-
 
 
 def jsonView(request):
     keyword = request.GET.get("ariyorum")
-
-
-
-
 
     jsons = {
         "input": "Arafat",
@@ -88,13 +88,6 @@ def jsonView(request):
         if i == keyword:
             key = j
 
-
-
-
-
-
-
-
     data = {
         "input": jsons.get('input'),
         "text": jsons.get('text'),
@@ -106,16 +99,12 @@ def jsonView(request):
         "checkbox": jsons.get('checkbox'),
         "select": jsons.get('select'),
 
-
         "tel": jsons.get('tel'),
         "email": jsons.get('email'),
         "password": jsons.get('password'),
         "date": jsons.get('date'),
 
     }
-
-
-
 
     context = {
         "data": data,
