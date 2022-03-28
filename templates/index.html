@@ -14,34 +14,47 @@
 
             {% if request.user.is_authenticated %}
                 <ul class="nav float-left">
-                <li>
-                    <div class="top-nav-search">
-                        <a href="#" class="responsive-search">
-                            <i class="fa fa-search"></i>
-                        </a>
-                        <form>
-                            {% csrf_token %}
-                            <input class="form-control" type="text" name="keyword" placeholder="Search here">
-                            <button class="btn" type="submit"><i class="fa fa-search"></i></button>
-                        </form>
-                    </div>
-                </li>
+                    <li>
+                        <div class="top-nav-search">
+                            <a href="#" class="responsive-search">
+                                <i class="fa fa-search"></i>
+                            </a>
+                            <form>
+                                {% csrf_token %}
+                                <input class="form-control" type="text" name="keyword" placeholder="Search here">
+{#                                <button class="btn" type="submit"><i class="fa fa-search"></i></button>#}
+                                <div class="card-body" style="margin: -0.25rem">
+                                    <button type="submit" class="btn btn-outline-info fa fa-search"></button>
+                                </div>
 
-                <a href="{% url 'json' %}">
-                    <div class="card-body" style="margin: -0.25rem">
-                        <button type="button" class="btn btn-primary d-inline-block mb-2">JSON</button>
-                    </div>
+                            </form>
 
 
-                </a>
-                <li>
-                    <a href="index.html" class="mobile-logo d-md-block d-lg-none d-block"><img
-                            src="{% static 'assets/img/logo1.png' %}" alt="" width="30" height="30"></a>
+                        </div>
+                    </li>
+
+{#                    <a href="#">#}
+{#                        <div class="card-body" style="margin: -0.25rem">#}
+{#                            <button type="submit" class="btn btn-danger d-inline-block mb-2 ">Ara</button>#}
+{#                        </div>#}
+{#                    </a>#}
 
 
-                </li>
+                    <a href="{% url 'json' %}">
+                        <div class="card-body" style="margin: -0.25rem">
+                            <button type="button" class="btn btn-primary d-inline-block mb-2">JSON</button>
+                        </div>
+                    </a>
 
-            </ul>
+
+                    <li>
+                        <a href="index.html" class="mobile-logo d-md-block d-lg-none d-block"><img
+                                src="{% static 'assets/img/logo1.png' %}" alt="" width="30" height="30"></a>
+
+
+                    </li>
+
+                </ul>
 
             {% endif %}
 

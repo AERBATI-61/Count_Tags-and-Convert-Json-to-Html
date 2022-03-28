@@ -3,18 +3,16 @@ import json
 from django.http import JsonResponse
 
 s = """
+
 <html>
     <html>
-    <html>
-    <html>
-        <b>
-        </b>
-        <body>
-            </body>
-        </body>
+    
+    <body>
+    
+    </body>
+    </body>
+
 </html>
-
-
 
 
 
@@ -24,7 +22,9 @@ s = """
 def indexView(request):
     keyword = request.GET.get("keyword")
     ariyorum = sayiyorum(keyword)
-    tag_gosteriyor = tag_goster()
+    tag_gosteriyors = tag_goster()
+    tag_gosteriyor = set(tag_gosteriyors)
+
 
     context = {
         "ariyorum": ariyorum,
@@ -48,6 +48,8 @@ def sayiyorum(hangi_tag):
 def tag_goster():
     kelimeler = list(s.strip().split("\n"))
     stack = []
+
+
     uzunluk = len(kelimeler)
     j = 0
 
@@ -60,7 +62,7 @@ def tag_goster():
             j += 1
         if j == uzunluk - 1:
             j = 0
-    print(stack[-1])
+
     return stack
 
 
