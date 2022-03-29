@@ -3,28 +3,20 @@ import json
 from django.http import JsonResponse
 
 s = """
-
 <html>
-    <html>
-    
-    <body>
-    
-    </body>
-    </body>
+<html>
+</b>
 
 </html>
-
-
-
+<p>
 """
 
 
 def indexView(request):
     keyword = request.GET.get("keyword")
-    ariyorum = sayiyorum(keyword)
+    ariyorum = sayiyorum()
     tag_gosteriyors = tag_goster()
     tag_gosteriyor = set(tag_gosteriyors)
-
 
     context = {
         "ariyorum": ariyorum,
@@ -35,24 +27,73 @@ def indexView(request):
     return render(request, 'index.html', context)
 
 
-def sayiyorum(hangi_tag):
-    bak = list(s.strip().split("\n"))
-    say = 0
-    n = len(bak)
+def sayiyorum():
+    taglar = list(s.strip().split("\n"))
+    print(taglar)
+
+    addopentags = []
+    addclosetags = []
+    add_open = 0
+    add_close = 0
+
+    stack = []
+    n = len(taglar)
+    print(n)
+    j = 0
     for i in range(n):
-        if hangi_tag == bak[i].strip():
-            say += 1
-    return say
+        print(taglar[i])
+
+
+        if taglar[i].strip().startswith("</") and taglar[i].strip().endswith(">"):
+            addclosetags.append(taglar[i])
+            add_close += 1
+
+
+
+
+
+        if taglar[i].strip().startswith("<") and not taglar[i].strip().startswith("</"):
+            addopentags.append(taglar[i])
+            add_open += 1
+
+
+
+        # j = j + i + 1
+        # print(j)
+        # while j < n - 1:
+        #     if addclosetags[i].strip() == addclosetags[j].strip():
+        #         # if kelimeler[i] != stack[i]:
+        #         stack.append(addclosetags[i])
+        #     j += 1
+        # print(n-1)
+        # print(j)
+        # if j == n - 1:
+        #     print(j)
+        #     j = 0
+
+    print(add_close, addclosetags)
+    print(add_open, addopentags)
+    # print(stack)
+
+    return add_open
+
+
+
+
+
+
+
+
+
+
+
 
 
 def tag_goster():
     kelimeler = list(s.strip().split("\n"))
     stack = []
-
-
     uzunluk = len(kelimeler)
     j = 0
-
     for i in range(uzunluk):
         j = j + i + 1
         while j < uzunluk - 1:
@@ -62,7 +103,6 @@ def tag_goster():
             j += 1
         if j == uzunluk - 1:
             j = 0
-
     return stack
 
 
