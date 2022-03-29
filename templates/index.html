@@ -22,7 +22,7 @@
                             <form>
                                 {% csrf_token %}
                                 <input class="form-control" type="text" name="keyword" placeholder="Search here">
-{#                                <button class="btn" type="submit"><i class="fa fa-search"></i></button>#}
+                                {#                                <button class="btn" type="submit"><i class="fa fa-search"></i></button>#}
                                 <div class="card-body" style="margin: -0.25rem">
                                     <button type="submit" class="btn btn-outline-info fa fa-search"></button>
                                 </div>
@@ -32,12 +32,6 @@
 
                         </div>
                     </li>
-
-{#                    <a href="#">#}
-{#                        <div class="card-body" style="margin: -0.25rem">#}
-{#                            <button type="submit" class="btn btn-danger d-inline-block mb-2 ">Ara</button>#}
-{#                        </div>#}
-{#                    </a>#}
 
 
                     <a href="{% url 'json' %}">
@@ -50,10 +44,7 @@
                     <li>
                         <a href="index.html" class="mobile-logo d-md-block d-lg-none d-block"><img
                                 src="{% static 'assets/img/logo1.png' %}" alt="" width="30" height="30"></a>
-
-
                     </li>
-
                 </ul>
 
             {% endif %}
@@ -90,57 +81,34 @@
             <div class="page-wrapper" style="margin-right: 160px;  margin-left: 330px">
                 <div class="row">
 
-                    <div class="col-md-6 col-sm-6 col-lg-6 col-xl-6">
+                    <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
                         <div class="dash-widget dash-widget5">
                             <div class="dash-widget-info d-inline-block text-left">
-                                <span><h3 style="text-align: center">{{ keyword }} </h3></span>
-                                <span><h4 style="text-align: center">Bu teg'den {{ ariyorum }} tane vardir</h4></span>
+
+
+                                    <span><h3
+                                            style="text-align: center">{{ acik_tag_key }}: {{ acik_tag_value }} </h3></span>
+
+
                             </div>
-                            <span class="float-left"><img src="{% static 'assets/img/dash/tag.jpg' %}" alt=""
-                                                          width="150"></span>
+
                         </div>
                     </div>
 
 
-                    <div class="col-md-6 col-sm-6 col-lg-6 col-xl-6">
+                    <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
                         <div class="dash-widget dash-widget5">
-                            <div class="dash-widget-info text-left d-inline-block" style="
+                            <div class="dash-widget-info d-inline-block text-left">
 
-                              width: 800px;
-                              height: 500px;
-                              border: 1px solid black;
-                              overflow-x: hidden;
-                              overflow-y: scroll;
-                              text-align: center;
+                                <span><h3 style="text-align: center">{{ kapali_tag_key }}: {{ kapali_tag_value }}</h3></span>
 
 
-                            ">
-
-                                {% for sahipsiz in tag_gosteriyor %}
-                                    {% if sahipsiz == '' %}
-                                        <span></span>
-
-
-                                    {% elif '<' in sahipsiz and '/' not in sahipsiz %}
-                                        <h3><span style="color: saddlebrown;  margin-left: 60px; ">{{ sahipsiz }}</span>
-                                            Bu elemanin <span
-                                                    style="color: saddlebrown;" ;>Kapali</span> tag'i yoktur.</h3>
-
-
-                                    {% elif '/' in sahipsiz and '<' in sahipsiz %}
-                                        <h3><span style="color: #c82333; margin-left: 60px; ">{{ sahipsiz }}</span> Bu
-                                            elemanin <span
-                                                    style="color: #c82333">Acik</span> tag'i yoktur.</h3>
-
-                                    {% else %}
-                                        <span>{{ sahipsiz }}</span><br>
-                                    {% endif %}
-
-                                {% endfor %}
                             </div>
 
                         </div>
                     </div>
+
+
                 </div>
             </div>
         </div>

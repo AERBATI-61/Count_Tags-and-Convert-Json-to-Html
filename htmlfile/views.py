@@ -1,81 +1,97 @@
 from django.shortcuts import render
 import json
 from django.http import JsonResponse
+from collections import Counter
 
-s = """
-<html>
-<html>
-</b>
-
-</html>
-<p>
-"""
-
+from .tags import tags
 
 def indexView(request):
     keyword = request.GET.get("keyword")
-    ariyorum = sayiyorum()
-    tag_gosteriyors = tag_goster()
-    tag_gosteriyor = set(tag_gosteriyors)
-
+    acik_tag = acik_tags()
     context = {
-        "ariyorum": ariyorum,
-        "keyword": keyword,
-        "tag_gosteriyor": tag_gosteriyor,
-
+        "acik_tag": acik_tag,
     }
     return render(request, 'index.html', context)
 
 
-def sayiyorum():
-    taglar = list(s.strip().split("\n"))
-    print(taglar)
+
+
+def acik_tags():
+
+    taglar = list(tags.strip().split("\n"))
 
     addopentags = []
-    addclosetags = []
     add_open = 0
+
+    addclosetags = []
     add_close = 0
 
-    stack = []
     n = len(taglar)
     print(n)
-    j = 0
+
+
     for i in range(n):
-        print(taglar[i])
+        if taglar[i].strip().startswith("<") and not taglar[i].strip().startswith("</"):
+            addopentags.append(taglar[i].strip())
+            add_open += 1
 
-
+    for i in range(n):
         if taglar[i].strip().startswith("</") and taglar[i].strip().endswith(">"):
-            addclosetags.append(taglar[i])
+            addclosetags.append(taglar[i].strip())
             add_close += 1
 
 
 
+    html_open_tags = Counter(addopentags)
+    for x, y in html_open_tags.items():
+        print(x, y)
 
 
-        if taglar[i].strip().startswith("<") and not taglar[i].strip().startswith("</"):
-            addopentags.append(taglar[i])
-            add_open += 1
+    html_close_tags = Counter(addclosetags)
+    for x, y in html_close_tags.items():
+        print(x, y)
+
+    return html_open_tags
 
 
 
-        # j = j + i + 1
-        # print(j)
-        # while j < n - 1:
-        #     if addclosetags[i].strip() == addclosetags[j].strip():
-        #         # if kelimeler[i] != stack[i]:
-        #         stack.append(addclosetags[i])
-        #     j += 1
-        # print(n-1)
-        # print(j)
-        # if j == n - 1:
-        #     print(j)
-        #     j = 0
 
-    print(add_close, addclosetags)
-    print(add_open, addopentags)
-    # print(stack)
 
-    return add_open
+
+
+
+
+# def kapali_tags():
+#     taglar = list(tags.strip().split("\n"))
+#
+#     addclosetags = []
+#     add_close = 0
+#
+#     n = len(taglar)
+#
+#     for i in range(n):
+#         if taglar[i].strip().startswith("</") and taglar[i].strip().endswith(">"):
+#             addclosetags.append(taglar[i].strip())
+#             add_close += 1
+#
+#     html_close_tags = Counter(addclosetags)
+#
+#     for x, y in html_close_tags.items():
+#         print(x, y)
+#
+#     return html_close_tags
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -90,7 +106,7 @@ def sayiyorum():
 
 
 def tag_goster():
-    kelimeler = list(s.strip().split("\n"))
+    kelimeler = list(tags.strip().split("\n"))
     stack = []
     uzunluk = len(kelimeler)
     j = 0
@@ -123,7 +139,6 @@ def jsonView(request):
         "textarea": "What is Lorem Ipsum?Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
         "select":
             {"Html": "Html", "Css": "Css", "Javascript": "Javascript", "Php": "Php", "SQL": "SQL"},
-
     }
     key = ""
     for i, j in jsons.items():
