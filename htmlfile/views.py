@@ -31,7 +31,7 @@ def acik_tags():
 
 
     for i in range(n):
-        if taglar[i].strip().startswith("<") and not taglar[i].strip().startswith("</"):
+        if taglar[i].strip().startswith("<") and not taglar[i].strip().startswith("</") and taglar[i].strip().endswith(">"):
             addopentags.append(taglar[i].strip())
             add_open += 1
 
