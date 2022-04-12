@@ -1,4 +1,4 @@
-s = """{% extends 'base.html' %}
+tags = """{% extends 'base.html' %}
 {% load static %}
 {% block content %}
 

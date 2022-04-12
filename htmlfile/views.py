@@ -27,15 +27,16 @@ def acik_tags():
     add_close = 0
 
     n = len(taglar)
-    print(n)
+
 
 
     for i in range(n):
-        print()
         if taglar[i].strip().startswith("<") and not taglar[i].strip().startswith("</")\
                 and taglar[i].strip().endswith(">") and len(taglar[i]) <= 15:
             addopentags.append(taglar[i].strip())
             add_open += 1
+
+
 
     for i in range(n):
         if taglar[i].strip().startswith("</") and taglar[i].strip().endswith(">"):
@@ -44,12 +45,43 @@ def acik_tags():
 
 
 
+
+    p = len(addclosetags) + len(addopentags)
+    t = 0
+
+    while t < p:
+        k = len(addopentags)
+        i = 0
+        while i < k:
+            if addopentags[i].replace('<', '</') in addclosetags:
+                index = addopentags[i].replace('<', '</')
+                j = addclosetags.index(index)
+                if index in addclosetags:
+                    addclosetags.pop(j)
+                addopentags.pop(i)
+                k -= 1
+            i += 1
+
+        x = len(addclosetags)
+        y = 0
+        while y < x:
+            if addclosetags[y].replace('</', '<') in addopentags:
+                index = addclosetags[y].replace('</', '<')
+                j = addopentags.index(index)
+                if index in addopentags:
+                    addopentags.pop(j)
+                addclosetags.pop(y)
+
+                x -= 1
+            y += 1
+        t += 1
+
+
     html_open_tags = Counter(addopentags)
-    print(addopentags)
     for x, y in html_open_tags.items():
         print(x, y)
 
-    print(addclosetags)
+
     html_close_tags = Counter(addclosetags)
     for x, y in html_close_tags.items():
         print(x, y)
