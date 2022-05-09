@@ -3,10 +3,7 @@
 {% block content %}
 
     <body>
-
     <div class="main-wrapper">
-
-
         <div class="page-wrapper" style="margin-left: 60px; margin-right: 60px">
             <div class="content container-fluid">
                 <div class="page-header">
@@ -65,8 +62,8 @@
                                         {% if data.input == key %}
                                             <div class="form-group">
                                                 <label>Input</label>
-                                                <input type="text" class="form-control" name="input"
-                                                       value="{{ data.input }}">
+                                                <input id="input" type="text" class="form-control" name="input"
+                                                       value="{{ data.input }}" onclick="button()">
                                             </div>
                                         {% endif %}
 
@@ -76,8 +73,8 @@
                                         {% if data.text == key %}
                                             <div class="form-group">
                                                 <label>Text</label>
-                                                <input type="text" class="form-control" name="text"
-                                                       value="{{ data.text }}">
+                                                <input id="text1" type="text" class="form-control" name="input"
+                                                       value="{{ data.text }}" onclick="text()">
                                             </div>
                                         {% endif %}
 
@@ -86,8 +83,9 @@
                                         {% if data.number == key %}
                                             <div class="form-group">
                                                 <label>Number</label>
-                                                <input type="number" disabled class="form-control" name="number"
-                                                       value="{{ data.number }}">
+
+                                                <input id="Number1" type="number" class="form-control" name="number"
+                                                       value="{{ data.number }}" onclick="number1()">
                                             </div>
                                         {% endif %}
 
@@ -248,6 +246,31 @@
 
 
                         </div>
+
+
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+
+
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title">Input Space</h4>
+                                </div>
+                                <div class="card-body">
+                                    <form action="#">
+                                        {% csrf_token %}
+
+                                        <div class="form-group">
+                                            <label>Input</label>
+                                            <input id="input1" type="text" class="form-control" name="input"
+                                                   value="{{ data.input }}" onclick="button()">
+                                        </div>
+
+                                    </form>
+                                </div>
+                            </div>
+
+
+                        </div>
                     </div>
                 </div>
 
@@ -255,6 +278,24 @@
         </div>
 
     </div>
+
+    <script>
+        function button() {
+            document.getElementById("input").type = "button";
+            document.getElementById("input").style.backgroundColor = "red";
+        }
+
+        function text() {
+            document.getElementById("text1").type = "password";
+            document.getElementById("text1").style.backgroundColor = "red";
+        }
+
+        function number1() {
+            document.getElementById("Number1").type = "input";
+            document.getElementById("Number1").style.backgroundColor = "red";
+        }
+    </script>
+
 
 
 {% endblock %}
